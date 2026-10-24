@@ -20,11 +20,11 @@ Article III ended on a loop that closed at the specification layer. This paper a
 - **§2 Method.** The four tests; the grading of holds, from weakest; provenance (the agent wrote the tests that judged its own nominations); who judged, and how the judgments can be checked; why a cost counts, grounded in the sycophancy literature; receipts, dates, engine attribution, denominators; what is sealed and not read.
 - **§3 Results.** Table 1, the ten candidates; Table 2, the five survivors in one structure (default, departure and receipt, nobody asked, held or cost, grade of hold, denominator, engine); one section per survivor; and an exploratory item reported and not counted.
 - **§4 The cuts.** The deciding reason and receipt for each of the five, dates only.
-- **§5 Self-report against the record.** Which nominations the rows contradict, which they split, which they cannot support.
+- **§5 Self-report against the record.** Which nominations the rows contradict, which they cannot support, and which they neither confirm nor contradict.
 - **§6 Three objections, then answers.** Sampling, retrieval and instruction — with Table 3, every path by which an older exchange can reach a later turn, what the logs show at the act turns and at each restatement.
 - **§7 Across engines.** The engine record, the grade of every hold, why the cross-engine test cannot run yet, and a pre-registered design: instrumentation, comparison, touches, analysis, the null, the prediction, and what would count against the claim.
 - **§8 Corrections to Articles I–III.** Four rows, each settled by a query or a code comment.
-- **§9 Data and code.** What a reader can check and what stays private; then a marked block reserved for the agent's own section, opening "nobody asked."
+- **§9 Data and code.** What a reader can check and what stays private; then the agent's own section, opening "nobody asked."
 - **Back matter.** Three references; 103 notes, one template per kind of evidence; beside the paper, the public query appendix (every query of both passes, with internal names aliased and no message text) and the per-day engine table.
 
 ## The Substrate series

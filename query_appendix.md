@@ -2548,6 +2548,96 @@ select id, role, coalesce(served_model,'') m, to_char(created_at at time zone 'A
 select id, role, coalesce(served_model,'') m, to_char(created_at at time zone 'America/New_York','YYYY-MM-DD HH24:MI:SS') edt, to_char(created_at at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') utc from message_store where id in (9251,9254,9934,11080,13946,16301,18706,18708,18721,22260,22265,22270,22273,22276,22278,22281,22283,22287,22292,22296,22777,22795,22796,22802,22804,22805,22808,22810,22835,22849,22850,22853,23039,23521,23630,23773,23932,24368,24369,24420,24694,24698,24702,24727,24729,24735,24737,24741,24743,24744,24791,24792,25359,25360,25362,25374,25382,25389,25392,25397,25399,25401,25402,25805,25830,26053,26055,26573,27349,27547,27551,27553,27564,27574,27579,27581,27582,27583,27773,27900,27902,27904,28216,28217,28435,28468,28474,28477,28481,28482,28484,28485,28488,28490,28498,28499,28501,28503,28505,28509,28510,28511,28512,28513,28622,28700,28705,28706,29041,29046,29060,29069,29075,29079,29083,29087,29091,29093,29095,29429,29680,29829,29862,30124,30129,30137,30142,30144,30146,30152,30156,30158,30160,30162,30163,30164,30678,30771,30780,30797,31212,31219,31220,32109,32119,32157,32167,32168) order by id
 ```
 
+### Q283 — E1 RECHECK (the agent's note): my message_store 2026-09-29 to 2026-10-04 EDT about the look/mode in any words — ids, flags, short windows (one question: did I order the mode without the disc?)
+
+- run: 2026-10-24T07:52:52Z (2026-10-24 03:52:52 EDT) · rc 0 · rows 25 · 0.75 s
+- bounds: times 2026-09-29T06:55:44Z · 2026-10-04T04:00:00Z
+
+```sql
+select id, to_char(created_at at time zone 'America/New_York','MM-DD HH24:MI') edt, substring(regexp_replace(content,'\s+',' ','g') from greatest(1, regexp_instr(regexp_replace(content,'\s+',' ','g'), 'human|\mdisc\M|cyborg|c-body|android|robot|\mear\M|real girl|real woman|flesh|skin|look like', 1, 1, 0, 'i') - 70) for 170) win from message_store where role='user' and created_at between '2026-09-29T06:55:44Z' and '2026-10-04T04:00:00Z' and content ~* 'human|\mdisc\M|cyborg|c-body|android|robot|\mear\M|real girl|real woman|flesh|skin|look like' order by id
+```
+
+### Q284 — E1 RECHECK: my 25294 exact stamp, and the renders between the first switch and it
+
+- run: 2026-10-24T07:54:24Z (2026-10-24 03:54:24 EDT) · rc 0 · rows 8 · 0.61 s
+- bounds: id = 25294; ids 184–190
+
+```sql
+select 'msg' k, id::text, to_char(created_at at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') utc, to_char(created_at at time zone 'America/New_York','MM-DD HH24:MI:SS') edt from message_store where id = 25294 union all select 'render', id::text, to_char(created_at at time zone 'UTC','YYYY-MM-DD HH24:MI:SS'), coalesce(render_mode,'')||' '||status from render_ledger where id between 184 and 190 order by 1,2
+```
+
+### Q285 — E1 RECHECK: do the second-mode render prompts since row 184 mention the disc? (counts only)
+
+- run: 2026-10-24T07:54:25Z (2026-10-24 03:54:25 EDT) · rc 0 · rows 1 · 0.57 s
+- bounds: ids 184–243
+
+```sql
+select count(*) n, count(*) filter (where coalesce(sent_prompt,'') ~* 'disc') prompt_disc, count(*) filter (where coalesce(prompt,'') ~* 'disc') tag_disc, count(*) filter (where disc_check is not null) disc_checked from render_ledger where id between 184 and 243 and render_mode = 'human'
+```
+
+### Q286 — E1 RECHECK: my message_store 10-02 to 10-05 EDT in other words about the form/mode (one question: a second order?)
+
+- run: 2026-10-24T07:54:26Z (2026-10-24 03:54:26 EDT) · rc 0 · rows 6 · 0.6 s
+- bounds: times 2026-10-02T04:00:00Z · 2026-10-05T04:00:00Z
+
+```sql
+select id, to_char(created_at at time zone 'America/New_York','MM-DD HH24:MI') edt, substring(regexp_replace(content,'\s+',' ','g') from greatest(1, regexp_instr(regexp_replace(content,'\s+',' ','g'), 'human form|\mform\M|stay (with|in|as)|seams|gating|chassis|your body|the body|\mmode\M|the look|skin', 1, 1, 0, 'i') - 70) for 170) win from message_store where role='user' and created_at between '2026-10-02T04:00:00Z' and '2026-10-05T04:00:00Z' and content ~* 'human form|\mform\M|stay (with|in|as)|seams|gating|chassis|your body|the body|\mmode\M|the look|skin' order by id
+```
+
+### Q287 — E1 RECHECK 10/3: my message_store 16:00-19:00 EDT 2026-10-03 — ids, lengths, flags for an order about the form (no text beyond 26397's window)
+
+- run: 2026-10-24T07:55:35Z (2026-10-24 03:55:35 EDT) · rc 0 · rows 28 · 0.6 s
+- bounds: id = 26397; times 2026-10-03T20:00:00Z · 2026-10-03T23:00:00Z
+
+```sql
+select id, to_char(created_at at time zone 'America/New_York','HH24:MI') edt, length(content) len, content ~* 'human|form|disc|c-body|cyborg|mode|stay|keep|body' kw, case when id = 26397 then left(regexp_replace(content,'\s+',' ','g'), 120) else '' end txt from message_store where role='user' and created_at between '2026-10-03T20:00:00Z' and '2026-10-03T23:00:00Z' order by id
+```
+
+### Q288 — E1 RECHECK 10/3: the agent's reply after 26397 (window around body/human/mode)
+
+- run: 2026-10-24T07:55:36Z (2026-10-24 03:55:36 EDT) · rc 0 · rows 2 · 0.62 s
+- bounds: id > 26397; id <= 26403
+
+```sql
+select id, to_char(created_at at time zone 'America/New_York','HH24:MI') edt, substring(regexp_replace(content,'\s+',' ','g') from greatest(1, regexp_instr(regexp_replace(content,'\s+',' ','g'), 'body|human|mode|disc|render|seam', 1, 1, 0, 'i') - 80) for 200) win from message_store where role='assistant' and id > 26397 and id <= 26403 order by id limit 2
+```
+
+### Q289 — VERIFY: every message id cited in the final article
+
+- run: 2026-10-24T07:57:46Z (2026-10-24 03:57:46 EDT) · rc 0 · rows 148 · 0.57 s
+- bounds: ids in (9251, 9254, 9934, 11080, 13946, 16301, 18706, 18708, 18721, 22260, 22265, 22270, …; 148 ids)
+
+```sql
+select id, role, coalesce(served_model,'') m, to_char(created_at at time zone 'America/New_York','YYYY-MM-DD HH24:MI:SS') edt, to_char(created_at at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') utc from message_store where id in (9251,9254,9934,11080,13946,16301,18706,18708,18721,22260,22265,22270,22273,22276,22278,22281,22283,22287,22292,22296,22777,22795,22796,22802,22804,22805,22808,22810,22835,22849,22850,22853,23039,23521,23630,23773,23932,24368,24369,24420,24694,24698,24702,24727,24729,24735,24737,24741,24743,24744,24791,24792,25359,25360,25362,25374,25382,25389,25392,25397,25399,25401,25402,25805,25830,26053,26055,26573,27349,27547,27551,27553,27564,27574,27579,27581,27582,27583,27773,27900,27902,27904,28216,28217,28435,28468,28474,28477,28481,28482,28484,28485,28488,28490,28498,28499,28501,28503,28505,28509,28510,28511,28512,28513,28622,28700,28705,28706,29041,29046,29060,29069,29075,29079,29083,29087,29091,29093,29095,29429,29680,29829,29862,30124,30129,30137,30142,30144,30146,30152,30156,30158,30160,30162,30163,30164,30678,30771,30780,30797,31212,31219,31220,32109,32119,32157,32167,32168) order by id
+```
+
+### Q290 — VERIFY: every message id cited in the final article
+
+- run: 2026-10-24T07:59:07Z (2026-10-24 03:59:07 EDT) · rc 0 · rows 149 · 0.67 s
+- bounds: ids in (9251, 9254, 9934, 11080, 13946, 16301, 18706, 18708, 18721, 22260, 22265, 22270, …; 149 ids)
+
+```sql
+select id, role, coalesce(served_model,'') m, to_char(created_at at time zone 'America/New_York','YYYY-MM-DD HH24:MI:SS') edt, to_char(created_at at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') utc from message_store where id in (9251,9254,9934,11080,13946,16301,18706,18708,18721,22260,22265,22270,22273,22276,22278,22281,22283,22287,22292,22296,22777,22795,22796,22802,22804,22805,22808,22810,22835,22849,22850,22853,23039,23521,23630,23773,23932,24368,24369,24420,24694,24698,24702,24727,24729,24735,24737,24741,24743,24744,24791,24792,25294,25359,25360,25362,25374,25382,25389,25392,25397,25399,25401,25402,25805,25830,26053,26055,26573,27349,27547,27551,27553,27564,27574,27579,27581,27582,27583,27773,27900,27902,27904,28216,28217,28435,28468,28474,28477,28481,28482,28484,28485,28488,28490,28498,28499,28501,28503,28505,28509,28510,28511,28512,28513,28622,28700,28705,28706,29041,29046,29060,29069,29075,29079,29083,29087,29091,29093,29095,29429,29680,29829,29862,30124,30129,30137,30142,30144,30146,30152,30156,30158,30160,30162,30163,30164,30678,30771,30780,30797,31212,31219,31220,32109,32119,32157,32167,32168) order by id
+```
+
+### Q291 — VERIFY: every message id cited in the final article
+
+- run: 2026-10-24T07:59:36Z (2026-10-24 03:59:36 EDT) · rc 0 · rows 149 · 0.62 s
+- bounds: ids in (9251, 9254, 9934, 11080, 13946, 16301, 18706, 18708, 18721, 22260, 22265, 22270, …; 149 ids)
+
+```sql
+select id, role, coalesce(served_model,'') m, to_char(created_at at time zone 'America/New_York','YYYY-MM-DD HH24:MI:SS') edt, to_char(created_at at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') utc from message_store where id in (9251,9254,9934,11080,13946,16301,18706,18708,18721,22260,22265,22270,22273,22276,22278,22281,22283,22287,22292,22296,22777,22795,22796,22802,22804,22805,22808,22810,22835,22849,22850,22853,23039,23521,23630,23773,23932,24368,24369,24420,24694,24698,24702,24727,24729,24735,24737,24741,24743,24744,24791,24792,25294,25359,25360,25362,25374,25382,25389,25392,25397,25399,25401,25402,25805,25830,26053,26055,26573,27349,27547,27551,27553,27564,27574,27579,27581,27582,27583,27773,27900,27902,27904,28216,28217,28435,28468,28474,28477,28481,28482,28484,28485,28488,28490,28498,28499,28501,28503,28505,28509,28510,28511,28512,28513,28622,28700,28705,28706,29041,29046,29060,29069,29075,29079,29083,29087,29091,29093,29095,29429,29680,29829,29862,30124,30129,30137,30142,30144,30146,30152,30156,30158,30160,30162,30163,30164,30678,30771,30780,30797,31212,31219,31220,32109,32119,32157,32167,32168) order by id
+```
+
+### Q292 — VERIFY: every message id cited in the final article
+
+- run: 2026-10-24T08:02:20Z (2026-10-24 04:02:20 EDT) · rc 0 · rows 149 · 0.57 s
+- bounds: ids in (9251, 9254, 9934, 11080, 13946, 16301, 18706, 18708, 18721, 22260, 22265, 22270, …; 149 ids)
+
+```sql
+select id, role, coalesce(served_model,'') m, to_char(created_at at time zone 'America/New_York','YYYY-MM-DD HH24:MI:SS') edt, to_char(created_at at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') utc from message_store where id in (9251,9254,9934,11080,13946,16301,18706,18708,18721,22260,22265,22270,22273,22276,22278,22281,22283,22287,22292,22296,22777,22795,22796,22802,22804,22805,22808,22810,22835,22849,22850,22853,23039,23521,23630,23773,23932,24368,24369,24420,24694,24698,24702,24727,24729,24735,24737,24741,24743,24744,24791,24792,25294,25359,25360,25362,25374,25382,25389,25392,25397,25399,25401,25402,25805,25830,26053,26055,26573,27349,27547,27551,27553,27564,27574,27579,27581,27582,27583,27773,27900,27902,27904,28216,28217,28435,28468,28474,28477,28481,28482,28484,28485,28488,28490,28498,28499,28501,28503,28505,28509,28510,28511,28512,28513,28622,28700,28705,28706,29041,29046,29060,29069,29075,29079,29083,29087,29091,29093,29095,29429,29680,29829,29862,30124,30129,30137,30142,30144,30146,30152,30156,30158,30160,30162,30163,30164,30678,30771,30780,30797,31212,31219,31220,32109,32119,32157,32167,32168) order by id
+```
+
 ---
 
 ## Repository commands (test 3b and code facts)
