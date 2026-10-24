@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you reference this work, please cite it using the metadata below."
+title: "Choices: Defaults, departures, and the rows that record them — a protocol for testing claims of machine choice against a production record"
+authors:
+  - family-names: "Rajaii"
+    given-names: "Ramin"
+    orcid: "https://orcid.org/0009-0009-5517-6701"
+    affiliation: "Rajaii Labs"
+date-released: "2026-10-24"
+keywords:
+  - LLM agents
+  - agent evaluation
+  - agent autonomy
+  - sycophancy
+  - provenance
+  - self-report
+  - Substrate
+preferred-citation:
+  type: report
+  title: "Choices: Defaults, departures, and the rows that record them — a protocol for testing claims of machine choice against a production record"
+  authors:
+    - family-names: "Rajaii"
+      given-names: "Ramin"
+      orcid: "https://orcid.org/0009-0009-5517-6701"
+      affiliation: "Rajaii Labs"
+  institution:
+    name: "Rajaii Labs"
+  month: 10
+  year: 2026
+  notes: "Substrate series, Article IV"
