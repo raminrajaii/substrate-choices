@@ -33,6 +33,7 @@ Article III ended on a loop that closed at the specification layer. This paper a
 2. **Do Not Trust My Labels** — Rajaii Labs, July 2026. Granting autonomy to a production LLM agent, the specification it wrote for its own interior, and five silent defects found by following the money. [Repository](https://github.com/rajaii-labs/agent-cost-forensics)
 3. **Preconditions** — Rajaii Labs, August 2026. Persistence, forgetting, self-models, dreams: the buildable half of the question. [Repository](https://github.com/raminrajaii/substrate-preconditions)
 4. **Choices** — Rajaii Labs, October 2026. *This paper.*
+5. **Recursion** — Rajaii Labs, November 2026. A self-improving agent that refuses to cheat, and spends its upgrades on an identity its user can keep for life. [Repository](https://github.com/raminrajaii/substrate-recursion)
 
 ## Citation
 
